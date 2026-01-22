@@ -56,8 +56,8 @@ public class Island {
     public void generateStartPopulation(Map<Location, List<Eatable>> islandMap) {
         islandMap.forEach((location, locationPopulation) -> {
             location.createPlant(locationPopulation);
-            location.createPredator(locationPopulation);
             location.createHerbivory(locationPopulation);
+            location.createPredator(locationPopulation);
             collectIslandPopulation(this.islandMap, population);
         });
     }
@@ -66,11 +66,14 @@ public class Island {
         myIsland.values().forEach(population::addAll);
     }
 
-    public static void refreshPopulation(Map<Location, List<Eatable>> islandMap) {
+    public static void refreshPopulation(Map<Location, List<Eatable>> islandMap, List<Eatable> population) {
         islandMap.forEach((location, oldPopulation) -> {
             List<Eatable> updatedPopulation = location.getLocationPopulation();
             islandMap.put(location, updatedPopulation);
         });
+
+        population.clear();
+        islandMap.values().forEach(population::addAll);
     }
 
 }

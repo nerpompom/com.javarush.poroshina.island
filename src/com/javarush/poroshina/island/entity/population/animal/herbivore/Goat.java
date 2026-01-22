@@ -11,6 +11,10 @@ public class Goat extends Herbivore {
         setBeEaten(false);
         setCurrentFull(0);
     }
+    @Override
+    public int getMaxCount() {
+        return PopulationSettings.maxGoatCount;
+    }
 
     @Override
     public boolean canEat(Population name) {

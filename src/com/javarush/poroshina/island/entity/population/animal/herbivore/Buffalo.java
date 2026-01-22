@@ -12,6 +12,10 @@ public class Buffalo extends Herbivore {
         setBeEaten(false);
         setCurrentFull(0);
     }
+    @Override
+    public int getMaxCount() {
+        return PopulationSettings.maxBuffaloCount;
+    }
 
     @Override
     public boolean canEat(Population name) {

@@ -31,7 +31,7 @@ public class Worker extends Thread {
                 });
             });
 
-            Island.refreshPopulation(islandMap);
+            Island.refreshPopulation(islandMap, Island.getInstance().getPopulation());
 
 
             taskExecutor.shutdown();
@@ -39,6 +39,7 @@ public class Worker extends Thread {
                 taskExecutor.awaitTermination(1, TimeUnit.HOURS);
             } catch (InterruptedException e) {
                 System.out.println(Thread.currentThread().getName() + ": " + AppConstants.THREAD_AWAIT_ERROR);
+                taskExecutor.shutdownNow();
             }
 
             Statistics.getStatistics(Island.getInstance().getPopulation());

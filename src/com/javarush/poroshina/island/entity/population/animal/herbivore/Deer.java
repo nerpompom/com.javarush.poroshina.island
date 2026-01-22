@@ -11,6 +11,10 @@ public class Deer extends Herbivore {
         setBeEaten(false);
         setCurrentFull(0);
     }
+    @Override
+    public int getMaxCount() {
+        return PopulationSettings.maxDeerCount;
+    }
 
     @Override
     public boolean canEat(Population name) {

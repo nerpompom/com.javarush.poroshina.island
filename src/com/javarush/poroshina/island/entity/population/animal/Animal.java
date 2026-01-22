@@ -12,14 +12,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-//внутри кода каждого метода животных добавить блокировку на момент работы метода
 
 public abstract class Animal implements Eatable {
-
-//    есть растения и/или других животных (если в их локации есть подходящая еда),
-//    передвигаться (в соседние локации),
-//    размножаться (при наличии пары в их локации),
-//    умирать от голода или быть съеденными.
 
     public Location location;
     double weight;
@@ -28,6 +22,7 @@ public abstract class Animal implements Eatable {
     int speed;
     boolean beEaten;
     boolean readyToMultiply;
+    boolean hungry;
 
     public Animal(Location location, double weight, double full, int speed) {
         this.location = location;
@@ -37,11 +32,24 @@ public abstract class Animal implements Eatable {
         setBeEaten(false);
         setCurrentFull(0);
         setReadyToMultiply(false);
+        setHungry(false);
     }
 
     @Override
     public boolean isBeEaten() {
         return beEaten;
+    }
+
+    public double getCurrentFull() {
+        return currentFull;
+    }
+
+    public boolean isHungry() {
+        return hungry;
+    }
+
+    public void setHungry(boolean hungry) {
+        this.hungry = hungry;
     }
 
     public boolean isReadyToMultiply() {
@@ -90,14 +98,13 @@ public abstract class Animal implements Eatable {
         return null;
 
     }
+    public abstract int getMaxCount();
 
-
-    public abstract void multiply(Location location);
-
+    public abstract void multiply(Location location, List<Eatable> eatables);
 
     public abstract boolean canEat(Population name);
 
-    public void eat(Location location, List<Eatable> food) {
+    public boolean eat(Location location, List<Eatable> food) {
         location.getLock().lock();
 
         List<Eatable> actualFood = food.stream()
@@ -105,17 +112,21 @@ public abstract class Animal implements Eatable {
                 .filter(eatable -> canEat(eatable.getPopulation()))
                 .collect(Collectors.toList());
 
-        actualFood.forEach(eatable -> {
-            if (eatable instanceof Plant) {
-                this.setReadyToMultiply(true);
-                ((Plant) eatable).setBeEaten(true);
-            } else if (eatable instanceof Animal) {
-                this.setReadyToMultiply(true);
-                ((Animal) eatable).setBeEaten(true);
-            }
-        });
-
+            actualFood.forEach(eatable -> {
+                if (eatable instanceof Plant) {
+                    this.setCurrentFull(this.getFull());
+                    ((Plant) eatable).setBeEaten(Random.getRandomBoolean());
+                    setHungry(Random.getRandomBoolean());
+                } else if (eatable instanceof Animal) {
+                    this.setCurrentFull(this.getFull());
+                    ((Animal) eatable).setBeEaten(Random.getRandomBoolean());
+                    setHungry(Random.getRandomBoolean());
+                } else {
+                    setHungry(true);
+                }
+            });
         location.getLock().unlock();
+        return this.isHungry();
     }
 
     private char getDivision() {
@@ -127,10 +138,9 @@ public abstract class Animal implements Eatable {
         }
     }
 
-
-    //рандомно двигаться?
     public void move(Location location) {
         location.getLock().lock();
+
         Location[][] locations = Island.getInstance().getLocations();
         int currentX = location.getX();
         int currentY = location.getY();
@@ -138,7 +148,6 @@ public abstract class Animal implements Eatable {
         int newX = currentX;
         int newY = currentY;
 
-        //Идем вверх или вниз
         switch (getDivision()) {
             case 'X' -> {
                 if (currentX + speed < Settings.xSize) {

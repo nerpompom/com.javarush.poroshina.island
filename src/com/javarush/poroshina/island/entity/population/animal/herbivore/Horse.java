@@ -11,6 +11,10 @@ public class Horse extends Herbivore {
         setBeEaten(false);
         setCurrentFull(0);
     }
+    @Override
+    public int getMaxCount() {
+        return PopulationSettings.maxHorseCount;
+    }
 
     @Override
     public boolean canEat(Population name) {

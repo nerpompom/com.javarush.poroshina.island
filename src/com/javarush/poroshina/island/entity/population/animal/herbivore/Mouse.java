@@ -11,6 +11,10 @@ public class Mouse extends Herbivore {
         setBeEaten(false);
         setCurrentFull(0);
     }
+    @Override
+    public int getMaxCount() {
+        return PopulationSettings.maxMouseCount;
+    }
 
     @Override
     public boolean canEat(Population name) {

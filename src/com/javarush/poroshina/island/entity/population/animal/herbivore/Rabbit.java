@@ -11,6 +11,10 @@ public class Rabbit extends Herbivore {
         setBeEaten(false);
         setCurrentFull(0);
     }
+    @Override
+    public int getMaxCount() {
+        return PopulationSettings.maxRabbitCount;
+    }
 
     @Override
     public boolean canEat(Population name) {

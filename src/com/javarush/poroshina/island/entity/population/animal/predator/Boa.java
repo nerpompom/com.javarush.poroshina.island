@@ -11,6 +11,10 @@ public class Boa extends Predator {
         setBeEaten(false);
         setCurrentFull(0);
     }
+    @Override
+    public int getMaxCount() {
+        return PopulationSettings.maxBoaCount;
+    }
 
     @Override
     public boolean canEat(Population name) {

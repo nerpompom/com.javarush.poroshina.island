@@ -11,6 +11,10 @@ public class Bear extends Predator {
         setBeEaten(false);
         setCurrentFull(0);
     }
+    @Override
+    public int getMaxCount() {
+        return PopulationSettings.maxBearCount;
+    }
 
     @Override
     public boolean canEat(Population name) {

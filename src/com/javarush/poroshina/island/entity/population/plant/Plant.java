@@ -1,10 +1,16 @@
 package com.javarush.poroshina.island.entity.population.plant;
 
+import com.javarush.poroshina.island.config.PopulationSettings;
+import com.javarush.poroshina.island.config.Settings;
 import com.javarush.poroshina.island.entity.island.Location;
 import com.javarush.poroshina.island.entity.population.Eatable;
 import com.javarush.poroshina.island.entity.population.Population;
+import com.javarush.poroshina.island.util.Random;
+import com.javarush.poroshina.island.util.Statistics;
 
 import java.util.List;
+import java.util.logging.LogManager;
+import java.util.stream.IntStream;
 
 public class Plant implements Eatable {
 
@@ -43,34 +49,15 @@ public class Plant implements Eatable {
     }
 
 
-    public void grow(Location location) {
+    public static void grow(Location location, List<Eatable> eatables) {
 
         location.getLock().lock();
 
+        int count = (int) (PopulationSettings.maxPlantCount * Random.multiplyPlantFactor);
 
-        //Проблемки с логикой роста растений !!!!! БОЛЬШАЯ ЛОГИКА ПОЧЕМУ-ТО НЕ ПОЗВОЛЯЕТ НИТЯМ ЗАКОНЧИТЬ РАБОТУ
-        List<Eatable> locationPopulation = location.getLocationPopulation();
-        locationPopulation.add(location.getPlantFactory().create(getPopulation(), location));
-//            if (location.currentNameCount(getPopulation()) < Indicator.eatableMaxNumber(getPopulation())) {
-//                int children = Random.getRandomInt(Indicator.eatableMaxNumber(getPopulation()) * Random.multiplyFactor);
-//                if ((children + location.currentNameCount(getPopulation()) >= Indicator.eatableMaxNumber(getPopulation()))) {
-//                    int difference = 0;
-//                    int left = Indicator.eatableMaxNumber(getPopulation());
-//                    int right = location.currentNameCount(getPopulation());
-//                    difference = left - right;
-//                    for (int i = 0; i < difference; i++) {
-//                        //population.add(location.getPredatorfactory().create(getPopulation(), location));
-//                        //надо позаботиться чтобы попадало в список острова
-//                        locationPopulation.add(location.getPlantFactory().create(getPopulation(), location));
-//                    }
-//                } else {
-//                    for (int i = 0; i < children; i++) {
-//                        //population.add(location.getHerbivoreFactory().create(getPopulation(), location));
-//                        //надо позаботиться чтобы попадало в список острова
-//                        locationPopulation.add(location.getPlantFactory().create(getPopulation(), location));
-//                    }
-//                }
-//            }
+        IntStream.range(0, count)
+                .mapToObj(i -> location.getPlantFactory().create(Population.PLANT, location))
+                .forEach(eatables::add);
 
         location.getLock().unlock();
     }

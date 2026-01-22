@@ -1,13 +1,13 @@
 package com.javarush.poroshina.island.util;
 
-import com.javarush.poroshina.island.repository.Factory;
-
 import java.util.concurrent.ThreadLocalRandom;
 
 public final class Random {
 
     public final static double startFactor = 0.75;
-    public final static double multiplyFactor = 0.1;
+    public final static double multiplyPlantFactor = 0.007;
+    public final static double multiplyHerbivoryFactor = 0.09;
+    public final static double multiplyPredatorFactor = 0.11;
     public final static int minChance = 0;
     public final static int maxChance = 101;
 

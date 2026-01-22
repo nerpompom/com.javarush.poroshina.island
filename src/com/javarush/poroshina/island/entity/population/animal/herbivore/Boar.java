@@ -13,6 +13,10 @@ public class Boar extends Herbivore {
         setBeEaten(false);
         setCurrentFull(0);
     }
+    @Override
+    public int getMaxCount() {
+        return PopulationSettings.maxBoarCount;
+    }
 
     //может для травоядных доработать метод? с учетом что почти все по 0-лям
     @Override

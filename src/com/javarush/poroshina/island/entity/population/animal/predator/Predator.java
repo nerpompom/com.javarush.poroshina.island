@@ -1,5 +1,7 @@
 package com.javarush.poroshina.island.entity.population.animal.predator;
 
+import com.javarush.poroshina.island.config.PopulationSettings;
+import com.javarush.poroshina.island.entity.population.Population;
 import com.javarush.poroshina.island.entity.population.animal.Animal;
 import com.javarush.poroshina.island.entity.population.Eatable;
 import com.javarush.poroshina.island.entity.island.Location;
@@ -7,6 +9,7 @@ import com.javarush.poroshina.island.util.Random;
 import com.javarush.poroshina.island.util.Statistics;
 
 import java.util.List;
+import java.util.stream.IntStream;
 
 public abstract class Predator extends Animal {
 
@@ -29,33 +32,13 @@ public abstract class Predator extends Animal {
     }
 
     @Override
-    public void multiply(Location location) {
+    public void multiply(Location location, List<Eatable> eatables) {
         location.getLock().lock();
-        //размножаться должны только с учетом того что есть другие животные того же вида
-        if (isFull()) {
-            List<Eatable> locationPopulation = location.getLocationPopulation();
-            if (location.currentNameCount(getPopulation()) < Statistics.eatableMaxNumber(getPopulation())) {
-                int children = Random.getRandomInt(Statistics.eatableMaxNumber(getPopulation()) * Random.multiplyFactor);
-                if ((children + location.currentNameCount(getPopulation()) >= Statistics.eatableMaxNumber(getPopulation()))) {
-                    int difference = 0;
-                    int left = Statistics.eatableMaxNumber(getPopulation());
-                    int right = location.currentNameCount(getPopulation());
-                    difference = left - right;
-                    for (int i = 0; i < difference; i++) {
-                        //population.add(location.getPredatorfactory().create(getPopulation(), location));
-                        //надо позаботиться чтобы попадало в список острова
-                        locationPopulation.add(location.getPredatorfactory().create(getPopulation(), location));
-                    }
-                } else {
-                    for (int i = 0; i < children; i++) {
-                        //population.add(location.getHerbivoreFactory().create(getPopulation(), location));
-                        //надо позаботиться чтобы попадало в список острова
-                        //Тест
-                        //locationPopulation.add(location.getHerbivoreFactory().create(getPopulation(), location));
-                    }
-                }
-            }
-        }
+
+        Eatable newborn = location.getPredatorfactory().create(this.getPopulation(), location);
+        eatables.add(newborn);
+        this.setReadyToMultiply(false);
+
         location.getLock().unlock();
     }
 

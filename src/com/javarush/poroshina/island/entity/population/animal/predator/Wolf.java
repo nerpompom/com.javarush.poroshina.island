@@ -11,6 +11,10 @@ public class Wolf extends Predator {
         setBeEaten(false);
         setCurrentFull(0);
     }
+    @Override
+    public int getMaxCount() {
+        return PopulationSettings.maxWolfCount;
+    }
 
     @Override
     public boolean canEat(Population name) {

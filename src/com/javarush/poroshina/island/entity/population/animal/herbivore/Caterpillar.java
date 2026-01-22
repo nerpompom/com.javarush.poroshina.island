@@ -11,6 +11,10 @@ public class Caterpillar extends Herbivore {
         setBeEaten(false);
         setCurrentFull(0);
     }
+    @Override
+    public int getMaxCount() {
+        return PopulationSettings.maxCaterpillarCount;
+    }
 
     @Override
     public boolean canEat(Population name) {

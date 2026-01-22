@@ -82,13 +82,13 @@ public class Location {
         ConcurrentHashMap<Population, Integer> maxCounts = new ConcurrentHashMap<>();
         maxCounts.put(Population.BOAR, PopulationSettings.maxBoarCount);
         maxCounts.put(Population.BUFFALO, PopulationSettings.maxBuffaloCount);
-        maxCounts.put(Population.CATERPILLAR, PopulationSettings.maxCaterpillarCount);
         maxCounts.put(Population.DEER, PopulationSettings.maxDeerCount);
         maxCounts.put(Population.DUCK, PopulationSettings.maxDuckCount);
         maxCounts.put(Population.GOAT, PopulationSettings.maxGoatCount);
         maxCounts.put(Population.HORSE, PopulationSettings.maxHorseCount);
         maxCounts.put(Population.MOUSE, PopulationSettings.maxMouseCount);
         maxCounts.put(Population.RABBIT, PopulationSettings.maxRabbitCount);
+        maxCounts.put(Population.CATERPILLAR, PopulationSettings.maxCaterpillarCount);
         maxCounts.put(Population.SHEEP, PopulationSettings.maxSheepCount);
 
         double factor = Random.startFactor;
