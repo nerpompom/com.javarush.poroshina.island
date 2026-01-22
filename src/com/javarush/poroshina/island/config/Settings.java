@@ -7,8 +7,8 @@ public class Settings {
     public static final long INITIAL_DELAY = 0;
     public static final long DELAY = 1;
 
-    public static final int xSize = 7; //100
-    public static final int ySize = 6;//20
+    public static final int xSize = 7;
+    public static final int ySize = 6;
 
-    public static final int SECONDS_OF_WORK = 20; //60
+    public static final int SECONDS_OF_WORK = 20;
 }
