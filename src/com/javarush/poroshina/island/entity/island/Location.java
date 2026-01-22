@@ -60,7 +60,6 @@ public class Location {
         this.y = y;
     }
 
-    //нужно ли в методе лочить?
     public List<Eatable> getLocationPopulation() {
         return locationPopulation;
     }
@@ -78,8 +77,8 @@ public class Location {
     }
 
     public void createHerbivory(List<Eatable> locationPopulation) {
-
         ConcurrentHashMap<Population, Integer> maxCounts = new ConcurrentHashMap<>();
+
         maxCounts.put(Population.BOAR, PopulationSettings.maxBoarCount);
         maxCounts.put(Population.BUFFALO, PopulationSettings.maxBuffaloCount);
         maxCounts.put(Population.DEER, PopulationSettings.maxDeerCount);
@@ -92,7 +91,6 @@ public class Location {
         maxCounts.put(Population.SHEEP, PopulationSettings.maxSheepCount);
 
         double factor = Random.startFactor;
-
         maxCounts.entrySet().parallelStream()
                 .forEach(entry -> {
                     Population population = entry.getKey();
@@ -105,8 +103,8 @@ public class Location {
     }
 
     public void createPredator(List<Eatable> locationPopulation) {
-
         ConcurrentHashMap<Population, Integer> maxCounts = new ConcurrentHashMap<>();
+
         maxCounts.put(Population.BEAR, PopulationSettings.maxBearCount);
         maxCounts.put(Population.BOA, PopulationSettings.maxBoaCount);
         maxCounts.put(Population.EAGLE, PopulationSettings.maxEagleCount);
@@ -114,7 +112,6 @@ public class Location {
         maxCounts.put(Population.WOLF, PopulationSettings.maxWolfCount);
 
         double factor = Random.startFactor;
-
         maxCounts.entrySet().parallelStream()
                 .forEach(entry -> {
                     Population population = entry.getKey();
@@ -127,20 +124,11 @@ public class Location {
     }
 
     public void createPlant(List<Eatable> locationPopulation) {
-
         double factor = Random.startFactor;
         int count = (int) (PopulationSettings.maxPlantCount * factor);
 
         IntStream.range(0, count)
                 .mapToObj(i -> plantFactory.create(Population.PLANT, currentLocation))
                 .forEach(locationPopulation::add);
-    }
-
-
-    //Разобраться в этом методе
-    public int currentNameCount(Population name) {
-        return (int) locationPopulation.stream()
-                .filter(eatable -> eatable.getPopulation().equals(name))
-                .count();
     }
 }

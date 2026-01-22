@@ -17,8 +17,12 @@ public class Eagle extends Predator {
     }
 
     @Override
-    public boolean canEat(Population name) {
+    public Population getPopulation() {
+        return Population.EAGLE;
+    }
 
+    @Override
+    public boolean canEat(Population name) {
         int chanceToEat = 0;
 
         switch (name) {
@@ -43,13 +47,6 @@ public class Eagle extends Predator {
         }
 
         int actual = Random.getRandomInt(Random.minChance, Random.maxChance);
-
         return actual < chanceToEat;
     }
-
-    @Override
-    public Population getPopulation() {
-        return Population.EAGLE;
-    }
-
 }

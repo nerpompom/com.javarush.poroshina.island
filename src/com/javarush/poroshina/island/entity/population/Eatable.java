@@ -1,6 +1,5 @@
 package com.javarush.poroshina.island.entity.population;
 
-import com.javarush.poroshina.island.entity.island.Location;
 import com.javarush.poroshina.island.entity.population.animal.Animal;
 
 import java.util.List;
@@ -14,7 +13,6 @@ public interface Eatable {
     Eatable die();
 
     static void populationDie(List<Eatable> eatables) {
-
         eatables.replaceAll(eatable -> {
             if (eatable.isBeEaten()) {
                 return eatable.die();
@@ -24,5 +22,4 @@ public interface Eatable {
             return eatable;
         });
     }
-
 }

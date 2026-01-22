@@ -1,22 +1,17 @@
 package com.javarush.poroshina.island.service;
 
 import com.javarush.poroshina.island.config.PopulationSettings;
-import com.javarush.poroshina.island.entity.island.Island;
 import com.javarush.poroshina.island.entity.island.Location;
 import com.javarush.poroshina.island.entity.population.Eatable;
 import com.javarush.poroshina.island.entity.population.animal.Animal;
-import com.javarush.poroshina.island.entity.population.animal.herbivore.Herbivore;
 import com.javarush.poroshina.island.entity.population.plant.Plant;
-
 import java.util.List;
-import java.util.Objects;
 
 public class Task implements Runnable {
 
     private final Eatable eatable;
     private final Location location;
     private final List<Eatable> eatables;
-
 
     public Task(Eatable eatable, Location location, List<Eatable> eatables) {
         this.eatable = eatable;
@@ -51,7 +46,6 @@ public class Task implements Runnable {
             }
 
             eatables.removeIf(eatable -> eatable == null);
-
             animal.move(location);
         }
     }

@@ -1,5 +1,6 @@
 package com.javarush.poroshina.island.repository;
 
+import com.javarush.poroshina.island.config.AppConstants;
 import com.javarush.poroshina.island.config.PopulationSettings;
 import com.javarush.poroshina.island.entity.island.Location;
 import com.javarush.poroshina.island.entity.population.Eatable;
@@ -45,6 +46,7 @@ public class HerbivoreFactory extends Factory {
                 try {
                     throw new Exception();
                 } catch (Exception e) {
+                    System.out.println(Thread.currentThread().getName() + ": " + AppConstants.EATABLE_CREATE_ERROR);
                     throw new RuntimeException(e);
                 }
             }

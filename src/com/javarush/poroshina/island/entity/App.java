@@ -5,8 +5,6 @@ import com.javarush.poroshina.island.entity.island.Island;
 import com.javarush.poroshina.island.entity.island.Location;
 import com.javarush.poroshina.island.entity.population.Eatable;
 import com.javarush.poroshina.island.service.Worker;
-import com.javarush.poroshina.island.util.Statistics;
-
 import java.util.List;
 import java.util.Map;
 
@@ -29,6 +27,5 @@ public class App {
         }
 
         System.out.println(AppConstants.END_MESSAGE);
-        System.out.println(Statistics.getDay());
     }
 }

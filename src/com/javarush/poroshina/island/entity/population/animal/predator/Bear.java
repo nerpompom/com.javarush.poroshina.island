@@ -17,8 +17,12 @@ public class Bear extends Predator {
     }
 
     @Override
-    public boolean canEat(Population name) {
+    public Population getPopulation() {
+        return Population.BEAR;
+    }
 
+    @Override
+    public boolean canEat(Population name) {
         int chanceToEat = 0;
 
         switch (name) {
@@ -46,10 +50,4 @@ public class Bear extends Predator {
 
         return actual < chanceToEat;
     }
-
-    @Override
-    public Population getPopulation() {
-        return Population.BEAR;
-    }
-
 }

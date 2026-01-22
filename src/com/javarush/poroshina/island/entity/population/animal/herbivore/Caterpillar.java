@@ -17,8 +17,12 @@ public class Caterpillar extends Herbivore {
     }
 
     @Override
-    public boolean canEat(Population name) {
+    public Population getPopulation() {
+        return Population.CATERPILLAR;
+    }
 
+    @Override
+    public boolean canEat(Population name) {
         int chanceToEat = 0;
 
         switch (name) {
@@ -43,17 +47,6 @@ public class Caterpillar extends Herbivore {
         }
 
         int actual = Random.getRandomInt(Random.minChance, Random.maxChance);
-
         return actual < chanceToEat;
-    }
-
-    @Override
-    public Population getPopulation() {
-        return Population.CATERPILLAR;
-    }
-
-    @Override
-    public void move(Location location) {
-
     }
 }

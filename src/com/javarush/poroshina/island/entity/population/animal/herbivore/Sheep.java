@@ -17,8 +17,12 @@ public class Sheep extends Herbivore {
     }
 
     @Override
-    public boolean canEat(Population name) {
+    public Population getPopulation() {
+        return Population.SHEEP;
+    }
 
+    @Override
+    public boolean canEat(Population name) {
         int chanceToEat = 0;
 
         switch (name) {
@@ -46,15 +50,4 @@ public class Sheep extends Herbivore {
 
         return actual < chanceToEat;
     }
-
-    @Override
-    public Population getPopulation() {
-        return Population.SHEEP;
-    }
-
-    @Override
-    public void move(Location location) {
-
-    }
-
 }

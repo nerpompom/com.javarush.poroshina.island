@@ -32,9 +32,8 @@ public class Worker extends Thread {
             });
 
             Island.refreshPopulation(islandMap, Island.getInstance().getPopulation());
-
-
             taskExecutor.shutdown();
+
             try {
                 taskExecutor.awaitTermination(1, TimeUnit.HOURS);
             } catch (InterruptedException e) {
@@ -46,34 +45,6 @@ public class Worker extends Thread {
         }, Settings.INITIAL_DELAY, Settings.DELAY, TimeUnit.SECONDS);
 
         completePool(islandService);
-
-
-
-
-
-
-
-
-
-
-
-
-
-//        ScheduledExecutorService islandService = new ScheduledThreadPoolExecutor(Settings.CORE_POOL_SIZE);
-//
-//        islandService.scheduleWithFixedDelay(() -> {
-//
-//            islandMap.forEach((location, eatableList) -> {
-//                eatableList.forEach(eatable -> {
-//                    Thread thread = new Thread(new Task(eatable, location));
-//                    thread.start();
-//                });
-//            });
-//
-//            Statistics.getStatistics(Island.getInstance().getPopulation());
-//        }, Settings.INITIAL_DELAY, Settings.DELAY, TimeUnit.SECONDS);
-//
-//        completePool(islandService);
     }
 
     private void completePool(ScheduledExecutorService islandService) {

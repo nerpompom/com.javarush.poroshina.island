@@ -7,21 +7,24 @@ import com.javarush.poroshina.island.util.Random;
 
 public class Boar extends Herbivore {
 
-
     public Boar(Location location, double weight, double full, int speed) {
         super(location, weight, full, speed);
         setBeEaten(false);
         setCurrentFull(0);
     }
+
     @Override
     public int getMaxCount() {
         return PopulationSettings.maxBoarCount;
     }
 
-    //может для травоядных доработать метод? с учетом что почти все по 0-лям
+    @Override
+    public Population getPopulation() {
+        return Population.BOAR;
+    }
+
     @Override
     public boolean canEat(Population name) {
-
         int chanceToEat = 0;
 
         switch (name) {
@@ -46,20 +49,6 @@ public class Boar extends Herbivore {
         }
 
         int actual = Random.getRandomInt(Random.minChance, Random.maxChance);
-
         return actual < chanceToEat;
     }
-
-    @Override
-    public Population getPopulation() {
-        return Population.BOAR;
-    }
-
-
-
-    @Override
-    public void move(Location location) {
-
-    }
-
 }

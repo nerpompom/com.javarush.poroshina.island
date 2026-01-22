@@ -7,7 +7,6 @@ import com.javarush.poroshina.island.entity.population.Eatable;
 import com.javarush.poroshina.island.entity.population.Population;
 import com.javarush.poroshina.island.entity.population.plant.Plant;
 import com.javarush.poroshina.island.util.Random;
-
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -52,10 +51,6 @@ public abstract class Animal implements Eatable {
         this.hungry = hungry;
     }
 
-    public boolean isReadyToMultiply() {
-        return readyToMultiply;
-    }
-
     public void setReadyToMultiply(boolean readyToMultiply) {
         this.readyToMultiply = readyToMultiply;
     }
@@ -94,10 +89,9 @@ public abstract class Animal implements Eatable {
 
     @Override
     public Eatable die() {
-        //надо ли тут лочить?
         return null;
-
     }
+
     public abstract int getMaxCount();
 
     public abstract void multiply(Location location, List<Eatable> eatables);
@@ -170,5 +164,4 @@ public abstract class Animal implements Eatable {
 
         location.getLock().unlock();
     }
-
 }

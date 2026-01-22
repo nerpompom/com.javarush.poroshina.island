@@ -3,7 +3,6 @@ package com.javarush.poroshina.island.entity.island;
 import com.javarush.poroshina.island.config.Settings;
 import com.javarush.poroshina.island.entity.population.Eatable;
 import com.javarush.poroshina.island.util.Statistics;
-
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -15,7 +14,6 @@ public class Island {
     final private Location[][] locations;
     private List<Eatable> population;
     Map<Location, List<Eatable>> islandMap;
-
 
     private Island() {
         this.locations = new Location[Settings.xSize][Settings.ySize];
