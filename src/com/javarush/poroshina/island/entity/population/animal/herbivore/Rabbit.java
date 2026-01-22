@@ -26,23 +26,9 @@ public class Rabbit extends Herbivore {
         int chanceToEat = 0;
 
         switch (name) {
-            case BOAR -> chanceToEat = PopulationSettings.rabbitChanceEatBoar;
-            case BUFFALO -> chanceToEat = PopulationSettings.rabbitChanceEatBuffalo;
-            case CATERPILLAR -> chanceToEat = PopulationSettings.rabbitChanceEatCaterpillar;
-            case DEER -> chanceToEat = PopulationSettings.rabbitChanceEatDeer;
-            case DUCK -> chanceToEat = PopulationSettings.rabbitChanceEatDuck;
-            case GOAT -> chanceToEat = PopulationSettings.rabbitChanceEatGoat;
-            case HORSE -> chanceToEat = PopulationSettings.rabbitChanceEatHorse;
-            case MOUSE -> chanceToEat = PopulationSettings.rabbitChanceEatMouse;
-            case RABBIT -> {
+            case RABBIT, BOAR, BUFFALO, CATERPILLAR, DEER, DUCK, GOAT, HORSE, MOUSE, SHEEP, BEAR, BOA, EAGLE, FOX, WOLF -> {
                 return false;
             }
-            case SHEEP -> chanceToEat = PopulationSettings.rabbitChanceEatSheep;
-            case BEAR -> chanceToEat = PopulationSettings.rabbitChanceEatBear;
-            case BOA -> chanceToEat = PopulationSettings.rabbitChanceEatBoa;
-            case EAGLE -> chanceToEat = PopulationSettings.rabbitChanceEatEagle;
-            case FOX -> chanceToEat = PopulationSettings.rabbitChanceEatFox;
-            case WOLF -> chanceToEat = PopulationSettings.rabbitChanceEatWolf;
             case PLANT -> chanceToEat = PopulationSettings.rabbitChanceEatPlant;
         }
 

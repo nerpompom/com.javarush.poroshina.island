@@ -28,7 +28,6 @@ public class Bear extends Predator {
         switch (name) {
             case BOAR -> chanceToEat = PopulationSettings.bearChanceEatBoar;
             case BUFFALO -> chanceToEat = PopulationSettings.bearChanceEatBuffalo;
-            case CATERPILLAR -> chanceToEat = PopulationSettings.bearChanceEatCaterpillar;
             case DEER -> chanceToEat = PopulationSettings.bearChanceEatDeer;
             case DUCK -> chanceToEat = PopulationSettings.bearChanceEatDuck;
             case GOAT -> chanceToEat = PopulationSettings.bearChanceEatGoat;
@@ -36,14 +35,10 @@ public class Bear extends Predator {
             case MOUSE -> chanceToEat = PopulationSettings.bearChanceEatMouse;
             case RABBIT -> chanceToEat = PopulationSettings.bearChanceEatRabbit;
             case SHEEP -> chanceToEat = PopulationSettings.bearChanceEatSheep;
-            case BEAR -> {
+            case BEAR, CATERPILLAR, EAGLE, FOX, WOLF, PLANT -> {
                 return false;
             }
             case BOA -> chanceToEat = PopulationSettings.bearChanceEatBoa;
-            case EAGLE -> chanceToEat = PopulationSettings.bearChanceEatEagle;
-            case FOX -> chanceToEat = PopulationSettings.bearChanceEatFox;
-            case WOLF -> chanceToEat = PopulationSettings.bearChanceEatWolf;
-            case PLANT -> chanceToEat = PopulationSettings.bearChanceEatPlant;
         }
 
         int actual = Random.getRandomInt(Random.minChance, Random.maxChance);

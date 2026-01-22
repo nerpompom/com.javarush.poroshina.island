@@ -26,24 +26,13 @@ public class Eagle extends Predator {
         int chanceToEat = 0;
 
         switch (name) {
-            case BOAR -> chanceToEat = PopulationSettings.eagleChanceEatBoar;
-            case BUFFALO -> chanceToEat = PopulationSettings.eagleChanceEatBuffalo;
-            case CATERPILLAR -> chanceToEat = PopulationSettings.eagleChanceEatCaterpillar;
-            case DEER -> chanceToEat = PopulationSettings.eagleChanceEatDeer;
             case DUCK -> chanceToEat = PopulationSettings.eagleChanceEatDuck;
-            case GOAT -> chanceToEat = PopulationSettings.eagleChanceEatGoat;
-            case HORSE -> chanceToEat = PopulationSettings.eagleChanceEatHorse;
             case MOUSE -> chanceToEat = PopulationSettings.eagleChanceEatMouse;
             case RABBIT -> chanceToEat = PopulationSettings.eagleChanceEatRabbit;
-            case SHEEP -> chanceToEat = PopulationSettings.eagleChanceEatSheep;
-            case BEAR -> chanceToEat = PopulationSettings.eagleChanceEatBear;
-            case BOA -> chanceToEat = PopulationSettings.eagleChanceEatBoa;
-            case EAGLE -> {
+            case EAGLE, BOAR, BUFFALO, CATERPILLAR, DEER, GOAT, HORSE, SHEEP, BEAR, BOA, WOLF, PLANT -> {
                 return false;
             }
             case FOX -> chanceToEat = PopulationSettings.eagleChanceEatFox;
-            case WOLF -> chanceToEat = PopulationSettings.eagleChanceEatWolf;
-            case PLANT -> chanceToEat = PopulationSettings.eagleChanceEatPlant;
         }
 
         int actual = Random.getRandomInt(Random.minChance, Random.maxChance);

@@ -26,23 +26,9 @@ public class Sheep extends Herbivore {
         int chanceToEat = 0;
 
         switch (name) {
-            case BOAR -> chanceToEat = PopulationSettings.sheepChanceEatBoar;
-            case BUFFALO -> chanceToEat = PopulationSettings.sheepChanceEatBuffalo;
-            case CATERPILLAR -> chanceToEat = PopulationSettings.sheepChanceEatCaterpillar;
-            case DEER -> chanceToEat = PopulationSettings.sheepChanceEatDeer;
-            case DUCK -> chanceToEat = PopulationSettings.sheepChanceEatDuck;
-            case GOAT -> chanceToEat = PopulationSettings.sheepChanceEatGoat;
-            case HORSE -> chanceToEat = PopulationSettings.sheepChanceEatHorse;
-            case MOUSE -> chanceToEat = PopulationSettings.sheepChanceEatMouse;
-            case RABBIT -> chanceToEat = PopulationSettings.sheepChanceEatRabbit;
-            case SHEEP -> {
+            case SHEEP, BOAR, BUFFALO, CATERPILLAR, DEER, DUCK, GOAT, HORSE, MOUSE, RABBIT, BEAR, BOA, EAGLE, FOX, WOLF-> {
                 return false;
             }
-            case BEAR -> chanceToEat = PopulationSettings.sheepChanceEatBear;
-            case BOA -> chanceToEat = PopulationSettings.sheepChanceEatBoa;
-            case EAGLE -> chanceToEat = PopulationSettings.sheepChanceEatEagle;
-            case FOX -> chanceToEat = PopulationSettings.sheepChanceEatFox;
-            case WOLF -> chanceToEat = PopulationSettings.sheepChanceEatWolf;
             case PLANT -> chanceToEat = PopulationSettings.sheepChanceEatPlant;
         }
 

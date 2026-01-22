@@ -28,7 +28,6 @@ public class Wolf extends Predator {
         switch (name) {
             case BOAR -> chanceToEat = PopulationSettings.wolfChanceEatBoar;
             case BUFFALO -> chanceToEat = PopulationSettings.wolfChanceEatBuffalo;
-            case CATERPILLAR -> chanceToEat = PopulationSettings.wolfChanceEatCaterpillar;
             case DEER -> chanceToEat = PopulationSettings.wolfChanceEatDeer;
             case DUCK -> chanceToEat = PopulationSettings.wolfChanceEatDuck;
             case GOAT -> chanceToEat = PopulationSettings.wolfChanceEatGoat;
@@ -36,11 +35,7 @@ public class Wolf extends Predator {
             case MOUSE -> chanceToEat = PopulationSettings.wolfChanceEatMouse;
             case RABBIT -> chanceToEat = PopulationSettings.wolfChanceEatRabbit;
             case SHEEP -> chanceToEat = PopulationSettings.wolfChanceEatSheep;
-            case BEAR -> chanceToEat = PopulationSettings.wolfChanceEatBear;
-            case BOA -> chanceToEat = PopulationSettings.wolfChanceEatBoa;
-            case EAGLE -> chanceToEat = PopulationSettings.wolfChanceEatEagle;
-            case FOX -> chanceToEat = PopulationSettings.wolfChanceEatFox;
-            case WOLF -> {
+            case WOLF, CATERPILLAR, BEAR, BOA, EAGLE, FOX -> {
                 return false;
             }
             case PLANT -> chanceToEat = PopulationSettings.wolfChanceEatPlant;

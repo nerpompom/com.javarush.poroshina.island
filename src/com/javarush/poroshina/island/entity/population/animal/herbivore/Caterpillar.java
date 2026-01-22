@@ -26,23 +26,9 @@ public class Caterpillar extends Herbivore {
         int chanceToEat = 0;
 
         switch (name) {
-            case BOAR -> chanceToEat = PopulationSettings.caterpillarChanceEatBoar;
-            case BUFFALO -> chanceToEat = PopulationSettings.caterpillarChanceEatBuffalo;
-            case CATERPILLAR -> {
+            case CATERPILLAR, BOAR, BUFFALO, DEER, DUCK, GOAT, HORSE, MOUSE, RABBIT, SHEEP, BEAR, BOA, EAGLE, FOX, WOLF-> {
                 return false;
             }
-            case DEER -> chanceToEat = PopulationSettings.caterpillarChanceEatDeer;
-            case DUCK -> chanceToEat = PopulationSettings.caterpillarChanceEatDuck;
-            case GOAT -> chanceToEat = PopulationSettings.caterpillarChanceEatGoat;
-            case HORSE -> chanceToEat = PopulationSettings.caterpillarChanceEatHorse;
-            case MOUSE -> chanceToEat = PopulationSettings.caterpillarChanceEatMouse;
-            case RABBIT -> chanceToEat = PopulationSettings.caterpillarChanceEatRabbit;
-            case SHEEP -> chanceToEat = PopulationSettings.caterpillarChanceEatSheep;
-            case BEAR -> chanceToEat = PopulationSettings.caterpillarChanceEatBear;
-            case BOA -> chanceToEat = PopulationSettings.caterpillarChanceEatBoa;
-            case EAGLE -> chanceToEat = PopulationSettings.caterpillarChanceEatEagle;
-            case FOX -> chanceToEat = PopulationSettings.caterpillarChanceEatFox;
-            case WOLF -> chanceToEat = PopulationSettings.caterpillarChanceEatWolf;
             case PLANT -> chanceToEat = PopulationSettings.caterpillarChanceEatPlant;
         }
 

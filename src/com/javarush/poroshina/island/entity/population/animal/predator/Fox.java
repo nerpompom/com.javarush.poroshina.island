@@ -25,24 +25,13 @@ public class Fox extends Predator {
         int chanceToEat = 0;
 
         switch (name) {
-            case BOAR -> chanceToEat = PopulationSettings.foxChanceEatBoar;
-            case BUFFALO -> chanceToEat = PopulationSettings.foxChanceEatBuffalo;
             case CATERPILLAR -> chanceToEat = PopulationSettings.foxChanceEatCaterpillar;
-            case DEER -> chanceToEat = PopulationSettings.foxChanceEatDeer;
             case DUCK -> chanceToEat = PopulationSettings.foxChanceEatDuck;
-            case GOAT -> chanceToEat = PopulationSettings.foxChanceEatGoat;
-            case HORSE -> chanceToEat = PopulationSettings.foxChanceEatHorse;
             case MOUSE -> chanceToEat = PopulationSettings.foxChanceEatMouse;
             case RABBIT -> chanceToEat = PopulationSettings.foxChanceEatRabbit;
-            case SHEEP -> chanceToEat = PopulationSettings.foxChanceEatSheep;
-            case BEAR -> chanceToEat = PopulationSettings.foxChanceEatBear;
-            case BOA -> chanceToEat = PopulationSettings.foxChanceEatBoa;
-            case EAGLE -> chanceToEat = PopulationSettings.foxChanceEatEagle;
-            case FOX -> {
+            case FOX, BOAR, BUFFALO, DEER, GOAT, HORSE, SHEEP, BEAR, BOA, EAGLE, WOLF, PLANT -> {
                 return false;
             }
-            case WOLF -> chanceToEat = PopulationSettings.foxChanceEatWolf;
-            case PLANT -> chanceToEat = PopulationSettings.foxChanceEatPlant;
         }
 
         int actual = Random.getRandomInt(Random.minChance, Random.maxChance);

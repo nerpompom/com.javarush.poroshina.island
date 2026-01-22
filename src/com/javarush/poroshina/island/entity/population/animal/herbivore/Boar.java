@@ -28,23 +28,11 @@ public class Boar extends Herbivore {
         int chanceToEat = 0;
 
         switch (name) {
-            case BOAR -> {
+            case BOAR, BUFFALO, DEER, DUCK, GOAT, HORSE, RABBIT, SHEEP, BEAR, BOA, EAGLE, FOX, WOLF -> {
                 return false;
             }
-            case BUFFALO -> chanceToEat = PopulationSettings.boarChanceEatBuffalo;
             case CATERPILLAR -> chanceToEat = PopulationSettings.boarChanceEatCaterpillar;
-            case DEER -> chanceToEat = PopulationSettings.boarChanceEatDeer;
-            case DUCK -> chanceToEat = PopulationSettings.boarChanceEatDuck;
-            case GOAT -> chanceToEat = PopulationSettings.boarChanceEatGoat;
-            case HORSE -> chanceToEat = PopulationSettings.boarChanceEatHorse;
             case MOUSE -> chanceToEat = PopulationSettings.boarChanceEatMouse;
-            case RABBIT -> chanceToEat = PopulationSettings.boarChanceEatRabbit;
-            case SHEEP -> chanceToEat = PopulationSettings.boarChanceEatSheep;
-            case BEAR -> chanceToEat = PopulationSettings.boarChanceEatBear;
-            case BOA -> chanceToEat = PopulationSettings.boarChanceEatBoa;
-            case EAGLE -> chanceToEat = PopulationSettings.boarChanceEatEagle;
-            case FOX -> chanceToEat = PopulationSettings.boarChanceEatFox;
-            case WOLF -> chanceToEat = PopulationSettings.boarChanceEatWolf;
             case PLANT -> chanceToEat = PopulationSettings.boarChanceEatPlant;
         }
 

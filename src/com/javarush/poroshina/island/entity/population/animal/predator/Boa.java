@@ -26,24 +26,13 @@ public class Boa extends Predator {
         int chanceToEat = 0;
 
         switch (name) {
-            case BOAR -> chanceToEat = PopulationSettings.boaChanceEatBoar;
-            case BUFFALO -> chanceToEat = PopulationSettings.boaChanceEatBuffalo;
-            case CATERPILLAR -> chanceToEat = PopulationSettings.boaChanceEatCaterpillar;
-            case DEER -> chanceToEat = PopulationSettings.boaChanceEatDeer;
             case DUCK -> chanceToEat = PopulationSettings.boaChanceEatDuck;
-            case GOAT -> chanceToEat = PopulationSettings.boaChanceEatGoat;
-            case HORSE -> chanceToEat = PopulationSettings.boaChanceEatHorse;
             case MOUSE -> chanceToEat = PopulationSettings.boaChanceEatMouse;
             case RABBIT -> chanceToEat = PopulationSettings.boaChanceEatRabbit;
-            case SHEEP -> chanceToEat = PopulationSettings.boaChanceEatSheep;
-            case BEAR -> chanceToEat = PopulationSettings.boaChanceEatBear;
-            case BOA -> {
+            case BOA, BOAR, BUFFALO, CATERPILLAR, DEER, GOAT, HORSE, SHEEP, BEAR, EAGLE, WOLF, PLANT -> {
                 return false;
             }
-            case EAGLE -> chanceToEat = PopulationSettings.boaChanceEatEagle;
             case FOX -> chanceToEat = PopulationSettings.boaChanceEatFox;
-            case WOLF -> chanceToEat = PopulationSettings.boaChanceEatWolf;
-            case PLANT -> chanceToEat = PopulationSettings.boaChanceEatPlant;
         }
 
         int actual = Random.getRandomInt(Random.minChance, Random.maxChance);

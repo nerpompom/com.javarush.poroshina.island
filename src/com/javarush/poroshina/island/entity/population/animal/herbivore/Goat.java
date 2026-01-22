@@ -26,23 +26,9 @@ public class Goat extends Herbivore {
         int chanceToEat = 0;
 
         switch (name) {
-            case BOAR -> chanceToEat = PopulationSettings.goatChanceEatBoar;
-            case BUFFALO -> chanceToEat = PopulationSettings.goatChanceEatBuffalo;
-            case CATERPILLAR -> chanceToEat = PopulationSettings.goatChanceEatCaterpillar;
-            case DEER -> chanceToEat = PopulationSettings.goatChanceEatDeer;
-            case DUCK -> chanceToEat = PopulationSettings.goatChanceEatDuck;
-            case GOAT -> {
+            case GOAT, BOAR, BUFFALO, CATERPILLAR, DEER, DUCK, HORSE, MOUSE, RABBIT, SHEEP, BEAR, BOA, EAGLE, FOX, WOLF -> {
                 return false;
             }
-            case HORSE -> chanceToEat = PopulationSettings.goatChanceEatHorse;
-            case MOUSE -> chanceToEat = PopulationSettings.goatChanceEatMouse;
-            case RABBIT -> chanceToEat = PopulationSettings.goatChanceEatRabbit;
-            case SHEEP -> chanceToEat = PopulationSettings.goatChanceEatSheep;
-            case BEAR -> chanceToEat = PopulationSettings.goatChanceEatBear;
-            case BOA -> chanceToEat = PopulationSettings.goatChanceEatBoa;
-            case EAGLE -> chanceToEat = PopulationSettings.goatChanceEatEagle;
-            case FOX -> chanceToEat = PopulationSettings.goatChanceEatFox;
-            case WOLF -> chanceToEat = PopulationSettings.goatChanceEatWolf;
             case PLANT -> chanceToEat = PopulationSettings.goatChanceEatPlant;
         }
 
