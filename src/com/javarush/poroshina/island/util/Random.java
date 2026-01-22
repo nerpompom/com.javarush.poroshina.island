@@ -1,5 +1,7 @@
 package com.javarush.poroshina.island.util;
 
+import com.javarush.poroshina.island.repository.Factory;
+
 import java.util.concurrent.ThreadLocalRandom;
 
 public final class Random {
@@ -27,6 +29,15 @@ public final class Random {
         return ThreadLocalRandom.current().nextBoolean();
     }
 
+    public static int getMaxInt(int[] numbers) {
+        int max = numbers[0];
 
+        for (int num : numbers) {
+            if (num > max) {
+                max = num;
+            }
+        }
 
+        return max;
+    }
 }

@@ -7,8 +7,8 @@ public class Settings {
     public static final long INITIAL_DELAY = 0;
     public static final long DELAY = 1;
 
-    public static final int xSize = 6; //100
-    public static final int ySize = 6;//20
+    public static final int xSize = 1; //100
+    public static final int ySize = 1;//20
 
-    public static final int DAYS_ON_THE_ISLAND = 5; //60
+    public static final int SECONDS_OF_WORK = 7; //60
 }

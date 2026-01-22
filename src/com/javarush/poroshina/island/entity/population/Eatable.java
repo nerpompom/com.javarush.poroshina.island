@@ -2,6 +2,8 @@ package com.javarush.poroshina.island.entity.population;
 
 import com.javarush.poroshina.island.entity.island.Location;
 
+import java.util.List;
+
 public interface Eatable {
 
     Population getPopulation();
@@ -10,14 +12,14 @@ public interface Eatable {
 
     Eatable die();
 
-    static void populationDie(Location location) {
-        for (int i = 0; i < location.getLocationPopulation().size(); i++) {
-            Eatable eatable = location.getLocationPopulation().get(i);
+    static void populationDie(List<Eatable> eatables) {
 
+        eatables.replaceAll(eatable -> {
             if (eatable.isBeEaten()) {
-                location.getLocationPopulation().set(i, eatable.die());
+                return eatable.die();
             }
-        }
-    };
+            return eatable;
+        });
+    }
 
 }

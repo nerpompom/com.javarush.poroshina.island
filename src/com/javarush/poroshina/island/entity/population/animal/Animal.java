@@ -27,6 +27,7 @@ public abstract class Animal implements Eatable {
     double currentFull;
     int speed;
     boolean beEaten;
+    boolean readyToMultiply;
 
     public Animal(Location location, double weight, double full, int speed) {
         this.location = location;
@@ -35,11 +36,20 @@ public abstract class Animal implements Eatable {
         this.speed = speed;
         setBeEaten(false);
         setCurrentFull(0);
+        setReadyToMultiply(false);
     }
 
     @Override
     public boolean isBeEaten() {
         return beEaten;
+    }
+
+    public boolean isReadyToMultiply() {
+        return readyToMultiply;
+    }
+
+    public void setReadyToMultiply(boolean readyToMultiply) {
+        this.readyToMultiply = readyToMultiply;
     }
 
     public boolean isFull() {
@@ -87,27 +97,24 @@ public abstract class Animal implements Eatable {
 
     public abstract boolean canEat(Population name);
 
-    public void eat(Location location) {
+    public void eat(Location location, List<Eatable> food) {
         location.getLock().lock();
-        List<Eatable> food = location.getLocationPopulation();
 
-        List<Eatable> filteredFood = food.stream()
+        List<Eatable> actualFood = food.stream()
                 .filter(Objects::nonNull)
                 .filter(eatable -> canEat(eatable.getPopulation()))
                 .collect(Collectors.toList());
 
-        for (Eatable eatable : filteredFood) {
+        actualFood.forEach(eatable -> {
             if (eatable instanceof Plant) {
-                currentFull += (((Plant) eatable).getWeight()) / 2;
-                weight += (currentFull / 2);
+                this.setReadyToMultiply(true);
                 ((Plant) eatable).setBeEaten(true);
-            }
-            if (eatable instanceof Animal) {
-                currentFull += (((Animal) eatable).getWeight()) / 2;
-                weight += (currentFull / 2);
+            } else if (eatable instanceof Animal) {
+                this.setReadyToMultiply(true);
                 ((Animal) eatable).setBeEaten(true);
             }
-        }
+        });
+
         location.getLock().unlock();
     }
 

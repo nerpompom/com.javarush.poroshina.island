@@ -5,6 +5,8 @@ import com.javarush.poroshina.island.entity.population.Eatable;
 import com.javarush.poroshina.island.util.Statistics;
 
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Island {
@@ -12,11 +14,13 @@ public class Island {
     private static Island instance;
     final private Location[][] locations;
     private List<Eatable> population;
+    Map<Location, List<Eatable>> islandMap;
 
 
-    private Island(){
+    private Island() {
         this.locations = new Location[Settings.xSize][Settings.ySize];
         this.population = new CopyOnWriteArrayList<>();
+        this.islandMap = new ConcurrentHashMap<>();
         Statistics.cleanStatistics();
     }
 
@@ -35,33 +39,38 @@ public class Island {
         return instance;
     }
 
-    public Location[][] createLocations() {
+    public Map<Location, List<Eatable>> getIslandMap() {
+        return islandMap;
+    }
+
+    public void createLocations() {
         for (int i = 0; i < Settings.xSize; i++) {
             for (int j = 0; j < Settings.ySize; j++) {
-                locations[i][j] = new Location(i, j);
+                Location currentLocation = new Location(i, j);
+                List<Eatable> locationPopulation = currentLocation.getLocationPopulation();
+                islandMap.put(currentLocation, locationPopulation);
             }
-        }
-        return locations;
-    }
-
-    public void generateIslandPopulation(Location[][] locations, List<Eatable> population) {
-        for (int i = 0; i < locations.length; i++) {
-            for (int j = 0; j < locations[i].length; j++) {
-                locations[i][j].generatePlantPopulation(locations[i][j].getLocationPopulation());
-                locations[i][j].generateHerbivoryPopulation(locations[i][j].getLocationPopulation());
-                locations[i][j].generatePredatorPopulation(locations[i][j].getLocationPopulation());
-            }
-            collectIslandPopulation(locations, population);
         }
     }
 
-    //метод, который должен подсобирать актуальную инфу по популяции с каждой локации. Куда его вставить?
-    public static void collectIslandPopulation(Location[][] locations, List<Eatable> population) {
-        for (int i = 0; i < locations.length; i++) {
-            for (int j = 0; j < locations[i].length; j++) {
-                population.addAll(locations[i][j].getLocationPopulation());
-            }
-        }
+    public void generateStartPopulation(Map<Location, List<Eatable>> islandMap) {
+        islandMap.forEach((location, locationPopulation) -> {
+            location.createPlant(locationPopulation);
+            location.createPredator(locationPopulation);
+            location.createHerbivory(locationPopulation);
+            collectIslandPopulation(this.islandMap, population);
+        });
+    }
+
+    public static void collectIslandPopulation(Map<Location, List<Eatable>> myIsland, List<Eatable> population) {
+        myIsland.values().forEach(population::addAll);
+    }
+
+    public static void refreshPopulation(Map<Location, List<Eatable>> islandMap) {
+        islandMap.forEach((location, oldPopulation) -> {
+            List<Eatable> updatedPopulation = location.getLocationPopulation();
+            islandMap.put(location, updatedPopulation);
+        });
     }
 
 }

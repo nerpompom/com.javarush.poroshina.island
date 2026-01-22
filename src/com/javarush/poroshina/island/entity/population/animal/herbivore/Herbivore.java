@@ -38,13 +38,13 @@ public abstract class Herbivore extends Animal {
                     for (int i = 0; i < difference; i++) {
                         //population.add(location.getHerbivoreFactory().create(getPopulation(), location));
                         //надо позаботиться чтобы попадало в список острова
-                        locationPopulation.add(location.getHerbivoreFactory().create(getPopulation(), location));
+                        //locationPopulation.add(location.getHerbivoreFactory().create(getPopulation(), location));
                     }
                 } else {
                     for (int i = 0; i < children; i++) {
                         //population.add(location.getHerbivoreFactory().create(getPopulation(), location));
                         //надо позаботиться чтобы попадало в список острова
-                        locationPopulation.add(location.getHerbivoreFactory().create(getPopulation(), location));
+                        //locationPopulation.add(location.getHerbivoreFactory().create(getPopulation(), location));
                     }
                 }
             }

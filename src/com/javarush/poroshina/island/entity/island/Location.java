@@ -13,9 +13,11 @@ import com.javarush.poroshina.island.util.Statistics;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.stream.IntStream;
 
 public class Location {
 
@@ -75,39 +77,65 @@ public class Location {
         return plantFactory;
     }
 
-    public void generateHerbivoryPopulation(List<Eatable> locationPopulation) {
-        generateRandomSpecimen(Random.getRandomInt(PopulationSettings.maxBoarCount * Random.startFactor), Population.BOAR, herbivoreFactory, locationPopulation);
-        generateRandomSpecimen(Random.getRandomInt(PopulationSettings.maxBuffaloCount * Random.startFactor), Population.BUFFALO, herbivoreFactory, locationPopulation);
-        generateRandomSpecimen(Random.getRandomInt(PopulationSettings.maxCaterpillarCount * Random.startFactor), Population.CATERPILLAR, herbivoreFactory, locationPopulation);
-        generateRandomSpecimen(Random.getRandomInt(PopulationSettings.maxDeerCount * Random.startFactor), Population.DEER, herbivoreFactory, locationPopulation);
-        generateRandomSpecimen(Random.getRandomInt(PopulationSettings.maxDuckCount * Random.startFactor), Population.DUCK, herbivoreFactory, locationPopulation);
-        generateRandomSpecimen(Random.getRandomInt(PopulationSettings.maxGoatCount * Random.startFactor), Population.GOAT, herbivoreFactory, locationPopulation);
-        generateRandomSpecimen(Random.getRandomInt(PopulationSettings.maxHorseCount * Random.startFactor), Population.HORSE, herbivoreFactory, locationPopulation);
-        generateRandomSpecimen(Random.getRandomInt(PopulationSettings.maxMouseCount * Random.startFactor), Population.MOUSE, herbivoreFactory, locationPopulation);
-        generateRandomSpecimen(Random.getRandomInt(PopulationSettings.maxRabbitCount * Random.startFactor), Population.RABBIT, herbivoreFactory, locationPopulation);
-        generateRandomSpecimen(Random.getRandomInt(PopulationSettings.maxSheepCount * Random.startFactor), Population.SHEEP, herbivoreFactory, locationPopulation);
+    public void createHerbivory(List<Eatable> locationPopulation) {
+
+        ConcurrentHashMap<Population, Integer> maxCounts = new ConcurrentHashMap<>();
+        maxCounts.put(Population.BOAR, PopulationSettings.maxBoarCount);
+        maxCounts.put(Population.BUFFALO, PopulationSettings.maxBuffaloCount);
+        maxCounts.put(Population.CATERPILLAR, PopulationSettings.maxCaterpillarCount);
+        maxCounts.put(Population.DEER, PopulationSettings.maxDeerCount);
+        maxCounts.put(Population.DUCK, PopulationSettings.maxDuckCount);
+        maxCounts.put(Population.GOAT, PopulationSettings.maxGoatCount);
+        maxCounts.put(Population.HORSE, PopulationSettings.maxHorseCount);
+        maxCounts.put(Population.MOUSE, PopulationSettings.maxMouseCount);
+        maxCounts.put(Population.RABBIT, PopulationSettings.maxRabbitCount);
+        maxCounts.put(Population.SHEEP, PopulationSettings.maxSheepCount);
+
+        double factor = Random.startFactor;
+
+        maxCounts.entrySet().parallelStream()
+                .forEach(entry -> {
+                    Population population = entry.getKey();
+                    int maxCount = entry.getValue();
+                    int count = (int) (maxCount * factor);
+                    IntStream.range(0, count)
+                            .mapToObj(i -> herbivoreFactory.create(population, currentLocation))
+                            .forEach(locationPopulation::add);
+                });
     }
 
-    public void generatePredatorPopulation(List<Eatable> locationPopulation) {
-        generateRandomSpecimen(Random.getRandomInt(PopulationSettings.maxBearCount * Random.startFactor), Population.BEAR, predatorfactory, locationPopulation);
-        generateRandomSpecimen(Random.getRandomInt(PopulationSettings.maxBoaCount * Random.startFactor), Population.BOA, predatorfactory, locationPopulation);
-        generateRandomSpecimen(Random.getRandomInt(PopulationSettings.maxEagleCount * Random.startFactor), Population.EAGLE, predatorfactory, locationPopulation);
-        generateRandomSpecimen(Random.getRandomInt(PopulationSettings.maxFoxCount * Random.startFactor), Population.FOX, predatorfactory, locationPopulation);
-        generateRandomSpecimen(Random.getRandomInt(PopulationSettings.maxWolfCount * Random.startFactor), Population.WOLF, predatorfactory, locationPopulation);
+    public void createPredator(List<Eatable> locationPopulation) {
 
+        ConcurrentHashMap<Population, Integer> maxCounts = new ConcurrentHashMap<>();
+        maxCounts.put(Population.BEAR, PopulationSettings.maxBearCount);
+        maxCounts.put(Population.BOA, PopulationSettings.maxBoaCount);
+        maxCounts.put(Population.EAGLE, PopulationSettings.maxEagleCount);
+        maxCounts.put(Population.FOX, PopulationSettings.maxFoxCount);
+        maxCounts.put(Population.WOLF, PopulationSettings.maxWolfCount);
+
+        double factor = Random.startFactor;
+
+        maxCounts.entrySet().parallelStream()
+                .forEach(entry -> {
+                    Population population = entry.getKey();
+                    int maxCount = entry.getValue();
+                    int count = (int) (maxCount * factor);
+                    IntStream.range(0, count)
+                            .mapToObj(i -> predatorfactory.create(population, currentLocation))
+                            .forEach(locationPopulation::add);
+                });
     }
 
-    public void generatePlantPopulation(List<Eatable> locationPopulation) {
-        generateRandomSpecimen(Random.getRandomInt(PopulationSettings.maxPlantCount * Random.startFactor), Population.PLANT, plantFactory, locationPopulation);
+    public void createPlant(List<Eatable> locationPopulation) {
+
+        double factor = Random.startFactor;
+        int count = (int) (PopulationSettings.maxPlantCount * factor);
+
+        IntStream.range(0, count)
+                .mapToObj(i -> plantFactory.create(Population.PLANT, currentLocation))
+                .forEach(locationPopulation::add);
     }
 
-    private void generateRandomSpecimen(int random, Population name, Factory factory, List<Eatable> locationPopulation) {
-        if (currentNameCount(name) < Statistics.eatableMaxNumber(name)) {
-            for (int i = 0; i < random; i++) {
-                locationPopulation.add(factory.create(name, currentLocation));
-            }
-        }
-    }
 
     //Разобраться в этом методе
     public int currentNameCount(Population name) {
@@ -116,4 +144,3 @@ public class Location {
                 .count();
     }
 }
-

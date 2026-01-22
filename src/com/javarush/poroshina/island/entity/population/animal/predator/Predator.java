@@ -50,7 +50,8 @@ public abstract class Predator extends Animal {
                     for (int i = 0; i < children; i++) {
                         //population.add(location.getHerbivoreFactory().create(getPopulation(), location));
                         //надо позаботиться чтобы попадало в список острова
-                        locationPopulation.add(location.getHerbivoreFactory().create(getPopulation(), location));
+                        //Тест
+                        //locationPopulation.add(location.getHerbivoreFactory().create(getPopulation(), location));
                     }
                 }
             }
